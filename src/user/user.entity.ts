@@ -7,7 +7,7 @@ export class User {
   id: number;
   @Column({ unique: true })
   username: string;
-  @Column()
+  @Column({ select: false }) //false 노출방지
   password: string;
 
   @OneToMany(() => Post, (post) => post.user)

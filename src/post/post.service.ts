@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Post } from './post.entity';
 import { Repository } from 'typeorm';
@@ -19,7 +19,7 @@ export class PostService {
       where: { id: postId, user },
     });
     if (!post) {
-      throw new Error('없음');
+      throw new HttpException('Post 없음', HttpStatus.NOT_FOUND);
     }
     await this.postRepository.remove(post);
   }
