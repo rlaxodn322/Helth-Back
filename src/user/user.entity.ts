@@ -1,15 +1,16 @@
-import { Post } from 'src/post/post.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('users')
+@Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
+
   @Column({ unique: true })
-  username: string;
-  @Column({ select: false }) //false 노출방지
+  email: String;
+
+  @Column()
   password: string;
 
-  @OneToMany(() => Post, (post) => post.user)
-  posts: Post[];
+  @Column({ nullable: true })
+  refreshToken: string;
 }

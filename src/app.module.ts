@@ -5,9 +5,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
-import { PostModule } from './post/post.module';
+import { UserModule } from './user/user.module';
+
 
 @Module({
   imports: [
@@ -32,9 +32,9 @@ import { PostModule } from './post/post.module';
         synchronize: configService.get<string>('NODE_ENV') !== 'production',
       }),
     }),
-    UserModule,
     AuthModule,
-    PostModule,
+    UserModule,
+
   ],
   controllers: [AppController],
   providers: [AppService],

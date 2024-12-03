@@ -1,23 +1,18 @@
 import { Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
-import { UserModule } from 'src/user/user.module';
-import { PassportModule } from '@nestjs/passport';
-import { JwtModule } from '@nestjs/jwt';
-import { LocalStrategy } from './local-auth.guard';
-import { JwtStrategy } from './jwt.strategy';
-import * as dotenv from 'dotenv';
-dotenv.config(); // 환경 변수 로드
+import { UserModule } from '../user/user.module';
+
 @Module({
   imports: [
-    UserModule, // UserService를 사용하기 위해 import
-    PassportModule,
+    UserModule,
     JwtModule.register({
-      secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: '1h' },
+      secret: 'your_secret_key', // 실제 환경에서는 .env로 관리하세요
+      signOptions: { expiresIn: '15m' },
     }),
   ],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [AuthService],
   controllers: [AuthController],
 })
 export class AuthModule {}
