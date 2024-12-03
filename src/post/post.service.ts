@@ -44,6 +44,20 @@ export class PostService {
     return this.postRepository.save(post);
   }
 
+  async deletePost(id: number, user: User): Promise<void> {
+    const post = await this.postRepository.findOne({
+      where: { id },
+      relations: ['user'],
+    });
+    if (!post) {
+      throw new NotFoundException('Post not Found');
+    }
+    if (post.user.id !== user.id) {
+      throw new ForbiddenException('You are not the owner of this post');
+    }
+    await this.postRepository.remove(post);
+  }
+
   async findAll(): Promise<Post[]> {
     return this.postRepository.find({ relations: ['user'] });
   }
