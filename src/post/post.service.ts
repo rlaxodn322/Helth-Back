@@ -35,13 +35,14 @@ export class PostService {
     if (!post) {
       throw new NotFoundException('post Not Found');
     }
+    console.log('Post User Id', post.user.id);
+    console.log('Current User Id', user.id);
     if (post.user.id !== user.id) {
       throw new ForbiddenException('You are not the user of this post');
     }
     Object.assign(post, updatePostDto);
     return this.postRepository.save(post);
   }
-  
 
   async findAll(): Promise<Post[]> {
     return this.postRepository.find({ relations: ['user'] });
