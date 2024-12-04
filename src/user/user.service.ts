@@ -14,7 +14,8 @@ export class UserService {
     return this.userRepository.findOne({ where: { email } });
   }
 
-  async createUser(email: string, password: string): Promise<User> {
+  async createUser(createUserDto: CreateUserDto): Promise<User> {
+    const { email, password } = createUserDto;
     if (!email || email.trim() === '') {
       throw new Error('Email cannot be empty');
     }

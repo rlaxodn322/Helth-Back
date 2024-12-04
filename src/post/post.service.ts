@@ -15,6 +15,7 @@ export class PostService {
   constructor(
     @InjectRepository(Post) private readonly postRepository: Repository<Post>,
   ) {}
+  
   async createPost(
     userId: string,
     createPostDto: CreatePostDto,
