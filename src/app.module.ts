@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { PostModule } from './post/post.module';
 import { CommentModule } from './comment/comment.module';
+import { NotificationModule } from './notification/notification.module';
 
 
 @Module({
@@ -38,6 +39,7 @@ import { CommentModule } from './comment/comment.module';
     UserModule,
     PostModule,
     CommentModule,
+    NotificationModule,
 
   ],
   controllers: [AppController],

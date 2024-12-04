@@ -24,7 +24,7 @@ export class Post {
   user: User;
 
   @Column()
-  userId: string;
+  userId: number;
 
   @OneToMany(() => Comment, (comment) => comment.post)
   comments: Comment[];
