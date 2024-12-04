@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { CommentService } from './comment.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { CreateCommentDto } from './create-comment.dto';
+import { CreateCommentDto } from './dto/create-comment.dto';
 
 @Controller('comment')
 export class CommentController {

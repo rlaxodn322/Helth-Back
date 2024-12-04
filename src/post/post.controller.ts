@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 import { PostService } from './post.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { CreatePostDto } from './create-post.dto';
+import { CreatePostDto } from './dto/create-post.dto';
 
 @Controller('post')
 export class PostController {
@@ -45,5 +45,16 @@ export class PostController {
   @Get()
   async findAll() {
     return this.postService.findAll();
+  }
+
+  @Post(':postId/like')
+  @UseGuards(JwtAuthGuard)
+  async toggleLike(@Param('postId') postId: number, @Req() req: any) {
+    const userId = req.user.id;
+    return this.postService.toggleLike(postId, userId);
+  }
+  @Get(':postId/like')
+  async getPostLikes(@Param('postId') postId: number) {
+    return { listCount: await this.postService.getPostLikes(postId) };
   }
 }

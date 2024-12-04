@@ -4,18 +4,20 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { Post } from './post.entity';
-import { CreatePostDto } from './create-post.dto';
+import { Post } from './entity/post.entity';
+import { CreatePostDto } from './dto/create-post.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/user/User.entity';
+import { User } from 'src/user/entity/user.entity';
 import { NotFoundError } from 'rxjs';
+import { Like } from './entity/like.entity';
 
 @Injectable()
 export class PostService {
   constructor(
     @InjectRepository(Post) private readonly postRepository: Repository<Post>,
+    @InjectRepository(Like) private readonly likeRepository: Repository<Like>,
   ) {}
-  
+
   async createPost(
     userId: string,
     createPostDto: CreatePostDto,
@@ -61,5 +63,35 @@ export class PostService {
 
   async findAll(): Promise<Post[]> {
     return this.postRepository.find({ relations: ['user'] });
+  }
+
+  async toggleLike(
+    postId: number,
+    userId: number,
+  ): Promise<{ message: string }> {
+    const post = await this.postRepository.findOne({ where: { id: postId } });
+    if (!post) {
+      throw new NotFoundException('Post Not Found');
+    }
+
+    const existingLike = await this.likeRepository.findOne({
+      where: { postId, userId },
+    });
+    if (existingLike) {
+      await this.likeRepository.delete({ postId, userId });
+      return { message: 'Like remove' };
+    } else {
+      await this.likeRepository.save({ postId, userId });
+      return { message: 'Like added' };
+    }
+  }
+  async getPostLikes(postId: number): Promise<number> {
+    const post = await this.postRepository.findOne({ where: { id: postId } });
+
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+    const likeCount = await this.likeRepository.count({ where: { postId } });
+    return likeCount;
   }
 }
