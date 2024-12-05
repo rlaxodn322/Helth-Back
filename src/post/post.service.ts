@@ -10,6 +10,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/user/entity/user.entity';
 import { NotFoundError } from 'rxjs';
 import { Like } from './entity/like.entity';
+import { NotificationService } from 'src/notification/notification.service';
+import { NotificationGateway } from 'src/notification/gateway/notification.Gateway';
 
 @Injectable()
 export class PostService {
