@@ -25,7 +25,7 @@ export class AuthService {
 
   async login(user: any) {
     const payload = { email: user.email, sub: user.id };
-    const accessToken = this.jwtService.sign(payload, { expiresIn: '15m' });
+    const accessToken = this.jwtService.sign(payload, { expiresIn: '1m' });
     const refreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });
     await this.userService.updateRefreshToken(user.id, refreshToken);
     return { accessToken, refreshToken };
@@ -33,14 +33,32 @@ export class AuthService {
 
   async refreshTokens(refreshToken: string) {
     try {
-      const payload = this.jwtService.verify(refreshToken);
+      const payload = this.jwtService.verify(refreshToken); // JWT 토큰 검증
       const user = await this.userService.findOneByEmail(payload.email);
-      if (!user || (await bcrypt.compare(refreshToken, user.refreshToken))) {
+
+      if (!user || !(await bcrypt.compare(refreshToken, user.refreshToken))) {
+        // 리프레시 토큰 비교
         throw new UnauthorizedException('Invalid refresh token');
       }
-      return this.login(user);
+
+      // 새 액세스 토큰 발급
+      return this.login(user); // 로그인 로직에 따라 액세스 토큰을 발급
     } catch (error) {
+      console.error('Error in refreshTokens:', error);
       throw new UnauthorizedException('Invalid refresh token');
     }
   }
+
+  // async refreshTokens(refreshToken: string) {
+  //   try {
+  //     const payload = this.jwtService.verify(refreshToken);
+  //     const user = await this.userService.findOneByEmail(payload.email);
+  //     if (!user || (await bcrypt.compare(refreshToken, user.refreshToken))) {
+  //       throw new UnauthorizedException('Invalid refresh token');
+  //     }
+  //     return this.login(user);
+  //   } catch (error) {
+  //     throw new UnauthorizedException('Invalid refresh token');
+  //   }
+  // }
 }
