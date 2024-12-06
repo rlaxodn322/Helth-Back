@@ -30,7 +30,10 @@ export class AuthService {
     await this.userService.updateRefreshToken(user.id, refreshToken);
     return { accessToken, refreshToken };
   }
-
+  // async logout(userId: number) {
+  //   console.log(userId);
+  //   await this.userService.updateRefreshToken(userId, null);
+  // }
   async refreshTokens(refreshToken: string) {
     try {
       const payload = this.jwtService.verify(refreshToken); // JWT 토큰 검증

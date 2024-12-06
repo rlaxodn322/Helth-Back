@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   Req,
   Request,
   UseGuards,
@@ -53,8 +54,18 @@ export class PostController {
     const userId = req.user.id;
     return this.postService.toggleLike(postId, userId);
   }
+
   @Get(':postId/like')
   async getPostLikes(@Param('postId') postId: number) {
     return { listCount: await this.postService.getPostLikes(postId) };
+  }
+
+  @Get(':postId/like/status')
+  @UseGuards(JwtAuthGuard)
+  async checkUserLikeStatus(@Param('postId') postId: number, @Req() req: any) {
+    const userId = req.user.id;
+    //console.log(postId, userId);
+    return this.postService.isPostLikedByUser(postId, userId);
+    //return { isLiked };
   }
 }

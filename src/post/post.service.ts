@@ -96,4 +96,17 @@ export class PostService {
     const likeCount = await this.likeRepository.count({ where: { postId } });
     return likeCount;
   }
+  async isPostLikedByUser(postId: number, userId: number): Promise<boolean> {
+    //console.log(postId, userId);
+    const like = await this.likeRepository.findOne({
+      where: { postId, userId },
+    });
+    if (like) {
+      //console.log(like);
+      return true;
+    } else {
+      //console.log(like);
+      return false;
+    }
+  }
 }
