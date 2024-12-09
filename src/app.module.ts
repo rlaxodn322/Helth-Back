@@ -11,6 +11,7 @@ import { PostModule } from './post/post.module';
 import { CommentModule } from './comment/comment.module';
 import { NotificationModule } from './notification/notification.module';
 import { WorkoutRecordModule } from './workout-record/workout-record.module';
+import { ProductModule } from './product/product.module';
 
 
 @Module({
@@ -42,6 +43,7 @@ import { WorkoutRecordModule } from './workout-record/workout-record.module';
     CommentModule,
     NotificationModule,
     WorkoutRecordModule,
+    ProductModule,
 
   ],
   controllers: [AppController],

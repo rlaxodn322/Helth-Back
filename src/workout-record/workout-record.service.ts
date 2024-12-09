@@ -11,11 +11,11 @@ export class WorkoutRecordService {
     private readonly workoutRepository: Repository<WorkoutRecord>,
   ) {}
 
-//   async createWorkoutRecord(
-//     user: User,
-//     exerciseType: string,
-//     sets: number,
-//     weight: number,
-//     reps: number,
-//   ): Promise<WorkoutRecord> {}
+  //   async createWorkoutRecord(
+  //     user: User,
+  //     exerciseType: string,
+  //     sets: number,
+  //     weight: number,
+  //     reps: number,
+  //   ): Promise<WorkoutRecord> {}
 }
