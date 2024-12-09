@@ -12,10 +12,14 @@ import { CommentModule } from './comment/comment.module';
 import { NotificationModule } from './notification/notification.module';
 import { WorkoutRecordModule } from './workout-record/workout-record.module';
 import { ProductModule } from './product/product.module';
-
-
+import { join } from 'path';
+import { ServeStaticModule } from '@nestjs/serve-static';
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'), // 정적 파일이 저장될 디렉토리 경로
+      serveRoot: '/uploads', // 외부에서 접근할 경로
+    }),
     ConfigModule.forRoot({
       isGlobal: true, // 전역 모듈로 설정
     }),
@@ -44,7 +48,6 @@ import { ProductModule } from './product/product.module';
     NotificationModule,
     WorkoutRecordModule,
     ProductModule,
-
   ],
   controllers: [AppController],
   providers: [AppService],

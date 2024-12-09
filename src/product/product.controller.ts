@@ -45,9 +45,9 @@ export class ProductController {
     @CurrentUser() user: User, // JWT 토큰으로 사용자 정보 가져오기
   ): Promise<Product> {
     const images = files?.images?.map((file) => file.path) || [];
-    console.log(images);
-    console.log('Files:', files); // 업로드된 파일 확인
-    console.log('Body:', createProductDto); // 전달된 데이터 확인
+    // console.log(images);
+    // console.log('Files:', files); // 업로드된 파일 확인
+    // console.log('Body:', createProductDto); // 전달된 데이터 확인
     return this.productService.createProduct(createProductDto, user, images);
   }
 
@@ -63,19 +63,19 @@ export class ProductController {
     return this.productService.findOne(id);
   }
 
-  // 상품 수정
-  @Put(':id')
-  @UseGuards(JwtAuthGuard) // 인증된 사용자만 접근
-  @UseInterceptors(FileFieldsInterceptor([{ name: 'images', maxCount: 5 }]))
-  async updateProduct(
-    @Param('id') id: number,
-    @Body() updateProductDto: UpdateProductDto,
-    @UploadedFiles() files: { images?: Express.Multer.File[] },
-  ): Promise<Product> {
-    const images = files?.images?.map((file) => file.path) || [];
-    updateProductDto.images = images;
-    return this.productService.updateProduct(id, updateProductDto);
-  }
+//   // 상품 수정
+//   @Put(':id')
+//   @UseGuards(JwtAuthGuard) // 인증된 사용자만 접근
+//   @UseInterceptors(FileFieldsInterceptor([{ name: 'images', maxCount: 5 }]))
+//   async updateProduct(
+//     @Param('id') id: number,
+//     @Body() updateProductDto: UpdateProductDto,
+//     @UploadedFiles() files: { images?: Express.Multer.File[] },
+//   ): Promise<Product> {
+//     const images = files?.images?.map((file) => file.path) || [];
+//     updateProductDto.images = images;
+//     return this.productService.updateProduct(id, updateProductDto);
+//   }
 
   // 상품 삭제
   @Delete(':id')

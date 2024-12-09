@@ -26,6 +26,7 @@
     "@nestjs/passport": "^10.0.3",
     "@nestjs/platform-express": "^10.4.13",
     "@nestjs/platform-socket.io": "^10.4.13",
+    "@nestjs/serve-static": "^4.0.2",
     "@nestjs/websockets": "^10.4.13",
     "@types/multer": "^1.4.12",
     "bcrypt": "^5.1.1",
