@@ -17,18 +17,20 @@ export class WorkoutRecord {
   exerciseType: string; //운동
 
   @Column()
-  targetWeight: number; //목표중량
+  topSetWeight: number; //목표중량
+  // @Column()
+  // sets: number; //수행 셋트
+
+  // @Column()
+  // weight: number; //실제 수행 중량
   @Column()
-  sets: number; //수행 셋트
+  topSetReps: number; //수행 반복 수
 
   @Column()
-  weight: number; //실제 수행 중량
+  volume: number;
 
-  @Column()
-  resps: number; //수행 반복 수
-
-  @Column({ nullable: true })
-  isTopSet: boolean; //탑세트 여부
+  // @Column()
+  // achieved: boolean; //탑세트 여부
 
   @CreateDateColumn()
   createdAt: Date;
