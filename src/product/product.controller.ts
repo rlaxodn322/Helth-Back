@@ -9,6 +9,7 @@ import {
   UploadedFiles,
   UseInterceptors,
   UseGuards,
+  Req,
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
@@ -78,9 +79,17 @@ export class ProductController {
 //   }
 
   // 상품 삭제
-  @Delete(':id')
+  // @Delete(':id')
+  // @UseGuards(JwtAuthGuard)
+  // async deleteProduct(@Param('id') id: number): Promise<void> {
+  //   await this.productService.removeProduct(id);
+  // }
+
+  
   @UseGuards(JwtAuthGuard)
-  async deleteProduct(@Param('id') id: number): Promise<void> {
-    await this.productService.removeProduct(id);
+  @Delete(':id')
+  async deletePost(@Param('id') id: number, @Req() req) {
+    const user = req.user;
+    return this.productService.deletePost(id, user);
   }
 }

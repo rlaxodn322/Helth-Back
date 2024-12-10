@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Product } from './entity/product.entity';
@@ -56,8 +60,21 @@ export class ProductService {
     };
   }
   // 상품 삭제
-  async removeProduct(id: number): Promise<void> {
-    await this.productRepository.delete(id);
+  // async removeProduct(id: number): Promise<void> {
+  //   await this.productRepository.delete(id);
+  // }
+  async deletePost(id: number, user: User): Promise<void> {
+    const post = await this.productRepository.findOne({
+      where: { id },
+      relations: ['user'],
+    });
+    if (!post) {
+      throw new NotFoundException('Post not Found');
+    }
+    if (post.user.id !== user.id) {
+      throw new ForbiddenException('You are not the owner of this post');
+    }
+    await this.productRepository.remove(post);
   }
 }
 //   // 상품 등록
