@@ -10,16 +10,16 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
   app.use(helmet());
+  app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
   // app.enableCors({
   //   origin: 'http://localhost:3001',
   //   credentials: true,
   //   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   //   allowedHeaders: ['Content-Type', 'Authorization'],
   // });
-
+  //app.enableCors(); // CORS를 활성화
   app.enableCors({
-    origin: 'http://localhost:3000',
-    credentials: true,
+    origin: 'http://localhost:3000', // 클라이언트 주소
   });
   const config = new DocumentBuilder()
     .setTitle('Project NestJS API')

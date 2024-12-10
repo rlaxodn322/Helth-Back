@@ -20,7 +20,7 @@ export class ProductService {
   ): Promise<Product> {
     // 이미지 경로를 '/'로 변경
     const formattedImages = images.map((image) => image.replace('\\', '/'));
-
+    console.log(formattedImages);
     const product = this.productRepository.create({
       ...createProductDto,
       user,
@@ -35,7 +35,8 @@ export class ProductService {
         ...product,
         images:
           product.images?.map(
-            (image) => image, // 이미지 경로를 그대로 반환
+            (image) =>
+              `http://localhost:3001/uploads/${image.split('/').pop()}`,
           ) || [],
       };
     });
