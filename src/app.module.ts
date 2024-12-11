@@ -16,6 +16,7 @@ import { join } from 'path';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { HealthNewsModule } from './health-news/health-news.module';
 import { ChatModule } from './chat/chat.module';
+import { CrawlModule } from './crawl/crawl.module';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
@@ -52,6 +53,7 @@ import { ChatModule } from './chat/chat.module';
     ProductModule,
     HealthNewsModule,
     ChatModule,
+    CrawlModule,
   ],
   controllers: [AppController],
   providers: [AppService],
