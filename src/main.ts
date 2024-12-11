@@ -14,9 +14,10 @@ async function bootstrap() {
 
   //app.enableCors(); // CORS를 활성화
   app.enableCors({
-    origin: 'http://localhost:3000', // 클라이언트 주소
+    origin: 'https://helth-gamma.vercel.app/', // 클라이언트 주소
     credentials: true, // credentials 포함 허용
   });
+
   const config = new DocumentBuilder()
     .setTitle('Project NestJS API')
     .setDescription('NestJS API documentation')

@@ -18,7 +18,7 @@ import { HealthNewsModule } from './health-news/health-news.module';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'uploads'), // 정적 파일이 저장될 디렉토리 경로
+      rootPath: join(__dirname, '..', 'uploads'), // src/uploads 경로가 아닌 dist 경로로 설정되는 문제 해결
       serveRoot: '/uploads', // 외부에서 접근할 경로
     }),
     ConfigModule.forRoot({
