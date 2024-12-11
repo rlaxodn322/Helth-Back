@@ -15,6 +15,7 @@ import { ProductModule } from './product/product.module';
 import { join } from 'path';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { HealthNewsModule } from './health-news/health-news.module';
+import { ChatModule } from './chat/chat.module';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
@@ -50,6 +51,7 @@ import { HealthNewsModule } from './health-news/health-news.module';
     WorkoutRecordModule,
     ProductModule,
     HealthNewsModule,
+    ChatModule,
   ],
   controllers: [AppController],
   providers: [AppService],
