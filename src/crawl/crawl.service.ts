@@ -47,6 +47,9 @@ export class CrawlService {
       return ['고혈압 정보 Get 문제 발생'];
     }
   }
+
+
+  
   async getDiabetesData(): Promise<string[]> {
     try {
       const response = await axios.get(
