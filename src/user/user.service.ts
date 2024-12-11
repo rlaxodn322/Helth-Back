@@ -9,7 +9,6 @@ export class UserService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
   ) {}
-
   async findOneByEmail(email: string): Promise<User | undefined> {
     return this.userRepository.findOne({ where: { email } });
   }
@@ -19,7 +18,6 @@ export class UserService {
     if (!email || email.trim() === '') {
       throw new Error('Email cannot be empty');
     }
-
     const existingUser = await this.userRepository.findOne({
       where: { email },
     });

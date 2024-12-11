@@ -10,7 +10,7 @@ import {
 import { Server, Socket } from 'socket.io';
 import { NotificationService } from '../notification.service';
 
-@WebSocketGateway(3002, { cors: { origin: '*' } })
+@WebSocketGateway(3003, { cors: { origin: '*' } })
 export class NotificationGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
 {
