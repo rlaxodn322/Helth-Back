@@ -50,6 +50,8 @@
    ![화면 캡처 2024-12-11 143842](https://github.com/user-attachments/assets/90a10ec5-f9fb-4b3d-9538-e7bf64b974ea)
    ![2](https://github.com/user-attachments/assets/f0364dca-5cc8-4b19-b73c-301a23cc9f46)
    ![3](https://github.com/user-attachments/assets/af76a0df-010a-4477-b2f7-5145a532d7d7)
+- DB
+  ![Untitled (1)](https://github.com/user-attachments/assets/1551e03f-398a-493e-a442-5c1bd14dfc92)
 
 
    
